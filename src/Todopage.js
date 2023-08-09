@@ -28,6 +28,12 @@ const [todos, setTodos] = useState([]);
         onChange={(e) => setNewTodo(e.target.value)}
       />
       <button onClick={handleAddTodo}>Add</button>
+      <div id={"todo-item" + this.props.id} style={this.state.style}>
+                <input type="button" value="✅" onClick={() => { this.checkitem() }} />
+                {this.props.text}
+                <input type="button" value="❌" onClick={() => { this.props.delete(this.props.id) }} />
+                
+            </div>
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>
