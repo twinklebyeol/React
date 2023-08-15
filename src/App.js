@@ -1,40 +1,28 @@
-import React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import TodoTemplate from './component/TodoTempalte';
-import TodoHead from './component/TodoHead';
-import TodoList from './component/TodoList';
-import TodoCreate from './component/TodoCreate';
-import { TodoProvider } from './TodoContext';
-// import Users from './Users';
-import Address from './Address';
-import RestaurantBookmarkApp from './RestaurantBookmarkApp'
-
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom"; // Import BrowserRouter
+import { createGlobalStyle } from "styled-components";
+import Main from "./Main";
+import Todopage from "./Todopage";
+import Yumpage from "./Yumpage";
 
 const GlobalStyle = createGlobalStyle`
-
-body{
-  background : #e9ecef;
-}`;
-
-
+    body {
+      
+    }
+`;
 
 function App() {
-  return( 
-  
-    <TodoProvider>
-      <Address />
-      <RestaurantBookmarkApp />
-      <GlobalStyle />
-      <TodoTemplate>
-        <TodoHead />
-        <TodoList />
-        <TodoCreate />
-      </TodoTemplate>
-    </TodoProvider>
-
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/todopage" element={<Todopage />} />
+          <Route path="/yumpage" element={<Yumpage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
-
 }
-
 
 export default App;

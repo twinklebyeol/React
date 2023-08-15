@@ -28,12 +28,9 @@
   }
 }
 
-
-
 /* 전체 앱 스타일 */
 
-
-.Container{
+.Container {
   display: flex;
   flex-direction: column;
   max-width: 700px;
@@ -43,27 +40,28 @@
   border-radius: 10px;
 }
 
-.maintitle_wrap{
+.maintitle_wrap {
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.foodimg{
+.foodimg {
   width: 550px;
   text-align: center;
   margin-bottom: -50px;
 }
 
-h1{
-  font-family: 'Prompt', sans-serif;  
+h1 {
+  font-family: "Prompt", sans-serif;
   font-size: 150px;
   text-align: center;
-  margin: 0;  
+  margin: 0;
 }
 
-h2{
-  font-family: 'Nanum Gothic', sans-serif;
+h2 {
+  font-family: "Nanum Gothic", sans-serif;
   font-size: 40px;
   margin-right: 40px;
 }
@@ -86,7 +84,6 @@ h2{
   overflow: hidden;
 }
 
-
 .container {
   display: inline-block;
   padding: 10px;
@@ -100,33 +97,24 @@ h2{
   color: #ffffff;
 }
 
-
-.imgbutton1{
+.imgbutton1 {
   width: 80px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
-.imgbutton1:hover{
-    background-color: #ffc619;
-}
-.imgbutton2{
+.imgbutton2 {
   width: 80px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
-.imgbutton2:hover{
-    background-color: #9AF821;
-}
-
-
-.todotitle_wrap{
+.todotitle_wrap {
   display: flex;
   justify-content: flex-start; /* 왼쪽 정렬로 변경 */
   align-items: center;
 }
-.todologo{
+.todologo {
   font-size: 40px; /* 원하는 폰트 크기로 변경 */
   margin: 0;
   padding-left: 20px; /* 로고를 왼쪽으로 이동 */
