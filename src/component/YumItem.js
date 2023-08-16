@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { useTodoDispatch } from '../TodoContext';
@@ -15,7 +15,7 @@ const Remove = styled.div`
   }
 `;
 
-const TodoItemBlock = styled.div`
+const YumItemBlock = styled.div`
   display: flex;
   align-items: center;
   padding-top: 12px;
@@ -57,23 +57,30 @@ const Text = styled.div`
     `}
 `;
 
-function TodoItem({ id, done, text }) {
+function YumItem({ id, done, text }) {
+  const dispatch = useTodoDispatch();
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-    const dispatch = useTodoDispatch();
-    const onToggle = () => dispatch({ type: 'TOGGLE', id });
-    const onRemove = () => dispatch({ type: 'REMOVE', id });
-
+  const onToggle = () => dispatch({ type: 'TOGGLE', id });
+  const onDelete = () => {
+    if (confirmDelete) {
+      dispatch({ type: 'REMOVE', id });
+      setConfirmDelete(false);
+    } else {
+      setConfirmDelete(true);
+    }
+  };
   return (
-    <TodoItemBlock>
-          <CheckCircle done={done} onClick={onToggle}>
-              {done && <MdDone />}
-          </CheckCircle>
+    <YumItemBlock>
+      <CheckCircle done={done} onClick={onToggle}>
+        {done && <MdDone />}
+      </CheckCircle>
       <Text done={done}>{text}</Text>
-          <Remove onClick={ onRemove}>
-        <MdDelete />
+      <Remove onClick={onDelete}>
+        {confirmDelete ? '정말로 삭제하시겠습니까?' : <MdDelete />}
       </Remove>
-    </TodoItemBlock>
+    </YumItemBlock>
   );
 }
 
-export default React.memo(TodoItem)
+export default React.memo(YumItem)

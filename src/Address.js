@@ -28,7 +28,7 @@ function Address() {
           onComplete={handleSelectPlace}
           autoClose={false}
           defaultQuery=""
-          apiScript={`https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false&appkey=YOUR_API_KEY`}
+          apiScript={`https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false&appkey=84cbc98e39f026fe18815f96084df1d3`}
         />
       )}
 

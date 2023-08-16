@@ -12,27 +12,23 @@ const TodoListBlock = styled.div`
   
 `;
 
-
 function TodoList() {
+  const todos = useTodoState();
 
-    const todos = useTodoState();
-       
-
-    return (
+  return (
+    <TodoListBlock>
+     
+      {todos.map(todo => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          text={todo.text}
+          done={todo.done}
+        />
+      ))}
     
-        <TodoListBlock>
-            {todos.map(todo => (
-                <TodoItem
-                    key={todo.id}
-                    id={todo.id}
-                    text={todo.text}
-                    done={todo.done}
-                />     
-            ))}
-
-        </TodoListBlock>
-    );
+    </TodoListBlock>
+  );
 }
-
 
 export default TodoList;

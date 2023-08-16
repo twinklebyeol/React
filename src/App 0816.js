@@ -1,10 +1,12 @@
 
 
+
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom"; 
 import { createGlobalStyle } from "styled-components";
 import Main from "./Main";
-import Todopage from "./Todopage_";
+
+import Todopage from "./Todopage";
 import Yumpage from "./Yumpage";
 
 const GlobalStyle = createGlobalStyle`
@@ -29,6 +31,4 @@ function App() {
 }
 
 export default App;
-
-
 

@@ -3,14 +3,19 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import { useTodoDispatch, useTodoNextId } from '../TodoContext';
+// import DaumPost from './DaumPost';
+import Address from '../Address';
+import Imageupload from '../Imageupload';
+import ImageUploader from '../ImageUploader';
+import DaumPost from './DaumPost';
 
 const CircleButton = styled.button`
-  background: #0029FF;
+  background: #FFC619;
   &:hover {
-    background: #FFC619;
+    background: #0029FF;
   }
   &:active {
-    background: #FFC619;
+    background: #0029FF;
   }
 
   z-index: 5;
@@ -37,9 +42,9 @@ const CircleButton = styled.button`
   ${props =>
         props.open &&
         css`
-      background: #FF196C;
+      background: #88DF18;
       &:hover {
-        background: #FF196C;
+        background: #88DF18;
       }
       &:active {
         background: #fa5252;
@@ -91,19 +96,19 @@ width: 100px;
 border: 0;
   outline: none;
   font-size: 15px;
-  background: #0029FF;
+  background: #FFC619;
   color: white;
   margin : 0 20px;
   padding: 10px;
   cursor: pointer;
   border-radius: 10px;
   &:hover {color: white;
-  background: #FFC619;
+  background: #0029FF;
 }
 `;
 
 
-function TodoCreate() {
+function YumCreate() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('');
 
@@ -112,42 +117,56 @@ function TodoCreate() {
 
     const onToggle = () => setOpen(!open);
     const onChange = e => setValue(e.target.value);
+  
     const onSubmit = e => {
-        e.preventDefault(); //새로고침 방지하기
-        dispatch({
-            type: 'CREATE',
-            todo: {
-                id: nextId.current,
-                text: value,
-                done: false
-            }
-        });
-        setValue('');
-        setOpen(false);
-        nextId.current += 1;
+      e.preventDefault(); // 새로고침 방지하기
+      const restaurantInfo = {
+        id: nextId.current,
+        text: value,
+        done: false,
+        address: value,
+      };
+      dispatch({
+        type: 'CREATE',
+        todo: restaurantInfo,
+      });
+      setValue('');
+      setOpen(false);
+      nextId.current += 1;
     };
 
     return (
         <>
-            {open && (
-                <InsertFormPositioner>
-                    <InsertForm onSubmit={onSubmit}>
-                        <Input 
-                            autoFocus
-                            placeholder="할 일 을 입 력 해 주 세 요!"
-                            onChange={onChange}
-                            value={value}
-                        />
-                         <InputButton type="submit">입력</InputButton>
-                    </InsertForm>
-                </InsertFormPositioner>
-            )}
-            <CircleButton onClick={onToggle} open={open}>
-                <MdAdd />
-            </CircleButton>
+        {open && (
+          
+          <InsertFormPositioner>
+                 <ImageUploader />
+            <InsertForm onSubmit={onSubmit}>
+          
+                <Input
+                  autoFocus
+                  placeholder="맛집 주소를 입력해주세요!"
+                  onChange={onChange}
+                  value={value}
+                />
+                <DaumPost />
+               
+       
+                <InputButton type="submit">등록</InputButton>
+              </InsertForm>
+            </InsertFormPositioner>
+          )}
+          <CircleButton onClick={onToggle} open={open}>
+            <MdAdd />
+          </CircleButton>
         </>
     );
 }
 
+export default React.memo(YumCreate);
 
-export default React.memo(TodoCreate);
+
+
+
+
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TodoTemplateBlock = styled.div`
+const YumTemplateBlock = styled.div`
 width : 1000px;
 height : 100%;
 position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
@@ -16,11 +16,11 @@ flex-direction: column;
 `;
 
 
-function TodoTemplate({ children }) {
-    return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+function YumTemplate({ children }) {
+    return <YumTemplateBlock>{children}</YumTemplateBlock>;
     
 }
 
-export default TodoTemplate;
+export default YumTemplate;
 
 
