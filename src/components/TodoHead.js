@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useTodoState } from '../TodoContext';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useTodoState } from "../TodoContext";
 
-import App_todo from '../App_todo';
-
-
+import App_todo from "../App_todo";
 
 const TodoHeadBlock = styled.div`
   padding-top: 20px;
@@ -13,7 +11,7 @@ const TodoHeadBlock = styled.div`
   padding-bottom: 24px;
   h1,
   h2 {
-    font-family: 'Prompt', sans-serif;
+    font-family: "Prompt", sans-serif;
   }
   h1 {
     font-size: 45px;
@@ -27,7 +25,7 @@ const TodoHeadBlock = styled.div`
   p,
   .day,
   .tasks-left {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: "Nanum Gothic", sans-serif;
   }
   p {
     margin: 0;
@@ -38,7 +36,7 @@ const TodoHeadBlock = styled.div`
   .tasks-left {
     text-align: center;
     text-decoration: underline;
-    color: #88DF18;
+    color: #88df18;
     font-size: 18px;
     margin-top: 40px;
     font-weight: bold;
@@ -51,17 +49,17 @@ function TodoHead() {
 
   useEffect(() => {
     if (todos) {
-      const undoneCount = todos.filter(todo => !todo.done).length;
+      const undoneCount = todos.filter((todo) => !todo.done).length;
       setUndoneTasks(undoneCount);
     }
   }, [todos]);
   const today = new Date();
-  const dateString = today.toLocaleString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const dateString = today.toLocaleString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
-  const dayName = today.toLocaleDateString('ko-KR', { weekday: 'short' });
+  const dayName = today.toLocaleDateString("ko-KR", { weekday: "short" });
 
   return (
     <TodoHeadBlock>
@@ -70,9 +68,8 @@ function TodoHead() {
       <p>
         {dateString} ({dayName})
       </p>
-      <div className='tasks-left'>할 일 {undoneTasks}개 남음</div> 
-      <App_todo />  
-      
+      <div className="tasks-left">할 일 {undoneTasks}개 남음</div>
+      <App_todo />
     </TodoHeadBlock>
   );
 }

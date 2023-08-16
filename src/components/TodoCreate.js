@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import { addDoc, collection } from '@firebase/firestore';
-import { MdAdd } from 'react-icons/md';
-import { db } from '../firebase';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import { addDoc, collection } from "@firebase/firestore";
+import { MdAdd } from "react-icons/md";
+import { db } from "../firebase";
 
 const CircleButton = styled.button`
-  background: #0029FF;
+  background: #0029ff;
   &:hover {
-    background: #FFC619;
+    background: ${(props) => (props.open ? "#fa5252" : "#ffc619")};
   }
   &:active {
-    background: #FFC619;
+    background: ${(props) => (props.open ? "#fa5252" : "#ffc619")};
   }
+
   z-index: 5;
   cursor: pointer;
   width: 80px;
@@ -31,13 +32,14 @@ const CircleButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
   transition: 0.125s all ease-in;
-  ${props =>
+  ${(props) =>
     props.open &&
     css`
-      background: #FF196C;
+      background: #ff196c;
       &:hover {
-        background: #FF196C;
+        background: #ff196c;
       }
       &:active {
         background: #fa5252;
@@ -50,7 +52,7 @@ const InsertFormPositioner = styled.div`
   width: 100%;
   bottom: 0;
   left: 0;
-  position: fixed;
+  position: absolute;
 `;
 
 const InsertForm = styled.form`
@@ -66,11 +68,12 @@ const InsertForm = styled.form`
 `;
 
 const Input = styled.input`
+  background: red;
   flex: 1;
   padding: 12px;
   margin-left: 8px;
   border-radius: 4px;
-  border: none;
+  border: 1px solid #dee2e6;
   width: 100%;
   outline: none;
   font-size: 18px;
@@ -83,29 +86,30 @@ const InputButton = styled.button`
   border: 0;
   outline: none;
   font-size: 15px;
-  background: #0029FF;
+  background: #0029ff;
   color: white;
-  margin: 0;
+  margin: 0 20px;
   padding: 10px;
   cursor: pointer;
   border-radius: 10px;
   &:hover {
     color: white;
-    background: #FFC619;
+    background: #ffc619;
   }
 `;
 
 function TodoCreate({ onTodoCreated }) {
   const [open, setOpen] = useState(false);
-  
-  const [newList, setNewList] = useState('');
-  const todosCollectionRef = collection(db, 'todos');
+  const [newList, setNewList] = useState("");
+  const todosCollectionRef = collection(db, "todos");
 
   const handleCreateList = async () => {
-    if (newList.trim() === '') return;
+    if (newList.trim() === "") return;
 
     const date = new Date();
-    const now_date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const now_date = `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
 
     await addDoc(todosCollectionRef, {
       content: newList,
@@ -113,20 +117,20 @@ function TodoCreate({ onTodoCreated }) {
       timeStamp: date,
     });
 
-    setNewList('');
+    setNewList("");
     setOpen(false);
     onTodoCreated();
   };
 
   const onToggle = () => setOpen(!open);
 
-  const handleKeyPress = e => {
-    if (e.key === 'Enter') {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
       handleCreateList();
     }
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     handleCreateList();
   };
@@ -140,16 +144,16 @@ function TodoCreate({ onTodoCreated }) {
               type="text"
               value={newList}
               placeholder="할 일 입력하기"
-              onChange={e => setNewList(e.target.value)}
+              onChange={(e) => setNewList(e.target.value)}
               onKeyDown={handleKeyPress}
             />
             <InputButton type="submit">입력</InputButton>
           </InsertForm>
         </InsertFormPositioner>
       )}
-        <CircleButton onClick={onToggle} open={open}>
-            <MdAdd />
-          </CircleButton>
+      <CircleButton onClick={onToggle} open={open}>
+        <MdAdd />
+      </CircleButton>
     </div>
   );
 }
